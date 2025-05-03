@@ -73,7 +73,7 @@ export default function Home() {
                             type="button"
                             key={char.id}
                             onClick={() => setSelectedCharacter(char.id)}
-                            className={`px-4 py-2 rounded-full border ${
+                            className={`px-4 py-2 rounded-full border cursor-pointer ${
                                 selectedCharacter === char.id
                                     ? "bg-blue-600 text-white"
                                     : "bg-gray-100 text-gray-800"
@@ -91,8 +91,8 @@ export default function Home() {
                             onClick={() =>
                                 setResponseLength(ResponseLength.Short)
                             }
-                            className={`px-4 py-2 transition-all duration-200 ${
-                                responseLength === "short"
+                            className={`px-4 py-2 transition-all duration-200 cursor-pointer ${
+                                responseLength === ResponseLength.Short
                                     ? "bg-green-600 text-white"
                                     : "bg-white text-gray-700"
                             }`}
@@ -104,8 +104,8 @@ export default function Home() {
                             onClick={() =>
                                 setResponseLength(ResponseLength.Long)
                             }
-                            className={`px-4 py-2 transition-all duration-200 ${
-                                responseLength === "long"
+                            className={`px-4 py-2 transition-all duration-200 cursor-pointer ${
+                                responseLength === ResponseLength.Long
                                     ? "bg-green-600 text-white"
                                     : "bg-white text-gray-700"
                             }`}
@@ -118,7 +118,7 @@ export default function Home() {
                 <button
                     type="submit"
                     disabled={loading || !selectedCharacter}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
                 >
                     {loading ? "Asking..." : "Ask"}
                 </button>
