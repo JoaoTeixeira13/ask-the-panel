@@ -1,15 +1,16 @@
+import { CharacterId } from "@/types/characters";
 import React from "react";
 
 type PanelResponseProps = {
-    character: string;
+    character: CharacterId;
     answer: string;
 };
 
 const characterNames: Record<string, string> = {
-    heiress: "Wealthy Heiress",
-    priest: "Italian Priest",
-    tarot: "Greek Tarot Reader",
-    bro: "Clueless Bro",
+    [CharacterId.Heiress]: "Wealthy Heiress",
+    [CharacterId.Priest]: "Italian Priest",
+    [CharacterId.Tarot]: "Greek Tarot Reader",
+    [CharacterId.Bro]: "Clueless Bro",
 };
 
 export const PanelResponse: React.FC<PanelResponseProps> = ({

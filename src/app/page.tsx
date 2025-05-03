@@ -2,25 +2,27 @@
 
 import { useState } from "react";
 import { PanelResponse } from "@/components/PanelResponse";
+import { CharacterId } from "@/types/characters";
+import { ResponseLength } from "@/types/responseLength";
 
 const charactersList = [
-    { id: "heiress", label: "Wealthy Heiress" },
-    { id: "priest", label: "Italian Priest" },
-    { id: "tarot", label: "Greek Tarot Reader" },
-    { id: "bro", label: "Clueless Bro" },
+    { id: CharacterId.Heiress, label: "Wealthy Heiress" },
+    { id: CharacterId.Priest, label: "Italian Priest" },
+    { id: CharacterId.Tarot, label: "Greek Tarot Reader" },
+    { id: CharacterId.Bro, label: "Clueless Bro" },
 ];
 
 export default function Home() {
     const [question, setQuestion] = useState("");
-    const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
-        null
+    const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>(
+        CharacterId.Heiress
     );
-    const [responseLength, setResponseLength] = useState<"short" | "long">(
-        "short"
+    const [responseLength, setResponseLength] = useState<ResponseLength>(
+        ResponseLength.Long
     );
     const [result, setResult] = useState<{
         answer: string;
-        selectedCharacter: string;
+        selectedCharacter: CharacterId;
     } | null>(null);
     const [loading, setLoading] = useState(false);
 
@@ -86,7 +88,9 @@ export default function Home() {
                     <div className="flex border rounded-full overflow-hidden text-sm">
                         <button
                             type="button"
-                            onClick={() => setResponseLength("short")}
+                            onClick={() =>
+                                setResponseLength(ResponseLength.Short)
+                            }
                             className={`px-4 py-2 transition-all duration-200 ${
                                 responseLength === "short"
                                     ? "bg-green-600 text-white"
@@ -97,7 +101,9 @@ export default function Home() {
                         </button>
                         <button
                             type="button"
-                            onClick={() => setResponseLength("long")}
+                            onClick={() =>
+                                setResponseLength(ResponseLength.Long)
+                            }
                             className={`px-4 py-2 transition-all duration-200 ${
                                 responseLength === "long"
                                     ? "bg-green-600 text-white"
