@@ -15,6 +15,9 @@ export default function Home() {
     const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
         null
     );
+    const [responseLength, setResponseLength] = useState<"short" | "long">(
+        "short"
+    );
     const [result, setResult] = useState<{
         answer: string;
         selectedCharacter: string;
@@ -34,6 +37,7 @@ export default function Home() {
             body: JSON.stringify({
                 selectedCharacter,
                 question,
+                responseLength,
             }),
         });
 
@@ -76,6 +80,33 @@ export default function Home() {
                             {char.label}
                         </button>
                     ))}
+                </div>
+
+                <div className="mb-6 flex justify-center">
+                    <div className="flex border rounded-full overflow-hidden text-sm">
+                        <button
+                            type="button"
+                            onClick={() => setResponseLength("short")}
+                            className={`px-4 py-2 transition-all duration-200 ${
+                                responseLength === "short"
+                                    ? "bg-green-600 text-white"
+                                    : "bg-white text-gray-700"
+                            }`}
+                        >
+                            Short
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setResponseLength("long")}
+                            className={`px-4 py-2 transition-all duration-200 ${
+                                responseLength === "long"
+                                    ? "bg-green-600 text-white"
+                                    : "bg-white text-gray-700"
+                            }`}
+                        >
+                            Long
+                        </button>
+                    </div>
                 </div>
 
                 <button
