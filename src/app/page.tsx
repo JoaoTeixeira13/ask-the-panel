@@ -6,6 +6,8 @@ import { CharacterId } from "@/types/characters";
 import { ResponseLength } from "@/types/responseLength";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { QuestionForm } from "@/components/QuestionForm";
+import { PromptResultSchema, PromptResut } from "@/types/promptResult";
+import { ErrorMessage } from "@/components/ErrorMessage";
 
 export default function Home() {
     const [question, setQuestion] = useState("");
@@ -15,10 +17,8 @@ export default function Home() {
     const [responseLength, setResponseLength] = useState<ResponseLength>(
         ResponseLength.Long
     );
-    const [result, setResult] = useState<{
-        answer: string;
-        selectedCharacter: CharacterId;
-    } | null>(null);
+    const [result, setResult] = useState<PromptResut | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -27,23 +27,35 @@ export default function Home() {
 
         setLoading(true);
         setResult(null);
+        setError(null);
 
-        const response = await fetch("/api/ask-panel", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                selectedCharacter,
-                question,
-                responseLength,
-            }),
-        });
+        try {
+            const response = await fetch("/api/ask-panel", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    selectedCharacter,
+                    question,
+                    responseLength,
+                }),
+            });
 
-        const data = await response.json();
-        setResult({
-            answer: data.answer,
-            selectedCharacter: data.selectedCharacter,
-        });
-        setLoading(false);
+            const rawData = await response.json();
+
+            const validatedResponse = PromptResultSchema.safeParse(rawData);
+
+            if (!validatedResponse.success) {
+                setError("Unexpected data format received from the panel.");
+                setLoading(false);
+                return;
+            }
+
+            setResult(validatedResponse.data);
+        } catch (error) {
+            setError("An error occured when submitting the form.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -64,6 +76,7 @@ export default function Home() {
             />
 
             <LoadingSpinner loading={loading} />
+            {error && <ErrorMessage message={error} />}
             <PanelResponse
                 character={result?.selectedCharacter}
                 answer={result?.answer}

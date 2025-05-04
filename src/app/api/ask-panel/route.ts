@@ -59,7 +59,6 @@ export async function POST(req: NextRequest) {
         }
 
         if (error instanceof Error) {
-            console.error("Unexpected Error:", error);
             return NextResponse.json(
                 {
                     error: "An unexpected error occurred",
