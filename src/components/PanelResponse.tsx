@@ -18,7 +18,7 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
     answer,
 }) => {
     return (
-        <div className="border p-4 rounded-xl shadow-md bg-white mb-4">
+        <div className="border border-accent p-4 rounded-xl shadow-md bg-background mb-4">
             <h2 className="text-xl font-semibold mb-2">
                 {character
                     ? `${characterNames[character]} says:`

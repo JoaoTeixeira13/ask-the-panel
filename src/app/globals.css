@@ -8,6 +8,8 @@
     --accent: #827660;
     --neutral: #6e6658;
     --luxury: #3b3a36;
+    --coral: #af2a1e;
+    --darkCoral: #872118;
 }
 
 @theme inline {
@@ -18,10 +20,18 @@
     --color-accent: var(--accent);
     --color-neutral: var(--neutral);
     --color-luxury: var(--luxury);
+    --color-coral: var(--coral);
+    --color-darkCoral: var(--darkCoral);
 }
 
 body {
-    background: var(--background);
+    background-color: var(--background);
+    background-image: linear-gradient(
+            rgba(251, 249, 242, 0.65),
+            rgba(251, 249, 242, 0.65)
+        ),
+        url("/images/wallpaper.webp");
+    background-repeat: repeat;
     color: var(--foreground);
     font-family: "Roboto", Arial, sans-serif;
 }

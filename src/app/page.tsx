@@ -9,7 +9,7 @@ const charactersList = [
     { id: CharacterId.Heiress, label: "Wealthy Heiress" },
     { id: CharacterId.Priest, label: "Italian Priest" },
     { id: CharacterId.Tarot, label: "Greek Tarot Reader" },
-    { id: CharacterId.Bro, label: "Clueless Bro" },
+    { id: CharacterId.Bro, label: "Crypto Bro" },
 ];
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
 
     return (
         <main className="max-w-2xl mx-auto px-6 py-16">
-            <h1 className="text-4xl font-serif font-semibold mb-10 text-center text-accent tracking-wide">
+            <h1 className="text-4xl font-serif font-semibold mb-10 text-center text-luxury tracking-wide">
                 Ask the Panel
             </h1>
 
@@ -122,12 +122,21 @@ export default function Home() {
                     <button
                         type="submit"
                         disabled={loading || !selectedCharacter}
-                        className="bg-accent hover:bg-luxury text-primary px-8 py-3 rounded-lg font-semibold transition disabled:opacity-50"
+                        className="bg-coral hover:bg-darkCoral text-primary px-8 py-3 w-24 rounded-lg font-semibold transition disabled:opacity-50"
                     >
                         {loading ? "Asking..." : "Ask"}
                     </button>
                 </div>
             </form>
+            <div className="h-12 flex justify-center items-center mt-3 mb-3">
+                {loading && (
+                    <img
+                        src="images/coral.png"
+                        alt="Loading..."
+                        className="h-12 w-12 animate-spin rounded-full border border-dotted border-accent"
+                    />
+                )}
+            </div>
 
             <PanelResponse
                 character={result?.selectedCharacter}
