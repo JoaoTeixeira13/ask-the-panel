@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ask the Panel
+
+Live Demo: [https://ask-the-panel.vercel.app/](https://ask-the-panel.vercel.app/)
+
+## Overview
+
+Ask the Panel is a playful and personality-driven Q&A GenAI app. Users can ask any question and receive a response from one of four characters:
+
+💎 Tiffany Vandergilt – A wealthy heiress from San Francisco
+
+⛪ Don Andrea Bellucci – An Italian priest with a peculiar spiritual wisdom
+
+🔮 Sibylla Naxos – A Greek tarot reader (or con artist?)
+
+🧢 Chad – A crypto bro
+
+You can choose between a short or long response based on how detailed you want the answer to be.
+
+![Demo](./public/readMe/ask-the-pannel3.gif)
+
+<br>
+
+![Demo](./public/readMe/ask-the-pannel1.gif)
+
+## Features
+
+-   Character-based answers powered by LLMs
+
+-   AI responses using openrouter.ai
+
+-   Switchable model (default: `mistralai/mistral-7b-instruct:free`)
+
+-   Input validation with **Zod**
+
+-   Fully deployed via **Vercel**
+
+## Tech Stack
+
+-   Next.js
+
+-   React
+
+-   TypeScript
+
+-   Tailwind CSS
+
+-   Zod
+
+-   OpenRouter API
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository and install dependencies:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`npm install`
+Create a .env file at the project root with the following values:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`OPENROUTER_API_KEY=your_openrouter_api_key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Then start the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`npm run dev`
 
-## Learn More
+Visit http://localhost:3000 in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    The model used by the app can be changed in the API config.ts (/lib/config.ts). Simply replace:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`config.model` with your desired model ID.
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The app is deployed with Vercel. Ensure the `.env` values are also set in the Vercel dashboard for production.
