@@ -33,7 +33,7 @@ export default function Home() {
         setLoading(true);
         setResult(null);
 
-        const res = await fetch("/api/ask-panel", {
+        const response = await fetch("/api/ask-panel", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -43,7 +43,7 @@ export default function Home() {
             }),
         });
 
-        const data = await res.json();
+        const data = await response.json();
         setResult({
             answer: data.answer,
             selectedCharacter: data.selectedCharacter,

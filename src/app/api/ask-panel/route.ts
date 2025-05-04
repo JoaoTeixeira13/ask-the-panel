@@ -1,6 +1,5 @@
-const MODEL = "mistralai/mistral-7b-instruct:free";
-
 import { getCharacterPrompt, LENGTH_INSTRUCTIONS } from "@/lib/characters";
+import { config } from "@/lib/config";
 import { PanelRequestSchema } from "@/types/panel";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
@@ -17,25 +16,22 @@ export async function POST(req: NextRequest) {
 
         const systemPrompt = `${characterPrompt}\n\n${LENGTH_INSTRUCTIONS[responseLength]}`;
 
-        const response = await fetch(
-            "https://openrouter.ai/api/v1/chat/completions",
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                    "Content-Type": "application/json",
-                    //"HTTP-Referer": "deployed url should go here",
-                    "X-Title": "Ask the Panel",
-                },
-                body: JSON.stringify({
-                    model: MODEL,
-                    messages: [
-                        { role: "system", content: systemPrompt },
-                        { role: "user", content: question },
-                    ],
-                }),
-            }
-        );
+        const response = await fetch(config.openRouterUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${config.openRouterApiKey}`,
+                "Content-Type": "application/json",
+                "HTTP-Referer": config.siteUrl,
+                "X-Title": config.panelTitle,
+            },
+            body: JSON.stringify({
+                model: config.model,
+                messages: [
+                    { role: "system", content: systemPrompt },
+                    { role: "user", content: question },
+                ],
+            }),
+        });
 
         if (!response.ok) {
             const error = await response.json();
