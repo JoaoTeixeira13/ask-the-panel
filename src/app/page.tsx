@@ -5,13 +5,7 @@ import { PanelResponse } from "@/components/PanelResponse";
 import { CharacterId } from "@/types/characters";
 import { ResponseLength } from "@/types/responseLength";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
-
-const charactersList = [
-    { id: CharacterId.Heiress, label: "Wealthy Heiress" },
-    { id: CharacterId.Priest, label: "Italian Priest" },
-    { id: CharacterId.Tarot, label: "Greek Tarot Reader" },
-    { id: CharacterId.Bro, label: "Crypto Bro" },
-];
+import { QuestionForm } from "@/components/QuestionForm";
 
 export default function Home() {
     const [question, setQuestion] = useState("");
@@ -58,77 +52,17 @@ export default function Home() {
                 Ask the Panel
             </h1>
 
-            <form
+            <QuestionForm
+                question={question}
+                onQuestionChange={setQuestion}
+                selectedCharacter={selectedCharacter}
+                onSelectCharacter={setSelectedCharacter}
+                responseLength={responseLength}
+                onResponseLengthChange={setResponseLength}
                 onSubmit={handleSubmit}
-                className="bg-white/70 backdrop-blur-md p-6 rounded-xl shadow-md border border-secondary mb-8"
-            >
-                <textarea
-                    className="w-full border border-muted rounded-lg p-4 mb-6 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                    rows={5}
-                    placeholder="Ask your question..."
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    required
-                />
+                loading={loading}
+            />
 
-                <div className="flex flex-wrap gap-4 mb-6 justify-center">
-                    {charactersList.map((character) => (
-                        <button
-                            type="button"
-                            key={character.id}
-                            onClick={() => setSelectedCharacter(character.id)}
-                            className={`px-5 py-2 rounded-full border text-sm font-medium transition ${
-                                selectedCharacter === character.id
-                                    ? "bg-luxury text-primary"
-                                    : "bg-accent border-muted text-primary hover:bg-luxury hover:text-primary"
-                            }`}
-                        >
-                            {character.label}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="mb-6 flex justify-center">
-                    <div className="flex border border-accent rounded-full overflow-hidden text-sm">
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setResponseLength(ResponseLength.Short)
-                            }
-                            className={`px-4 py-2 text-primary ${
-                                responseLength === ResponseLength.Short
-                                    ? "bg-luxury"
-                                    : "bg-accent"
-                            }`}
-                        >
-                            Short
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setResponseLength(ResponseLength.Long)
-                            }
-                            className={`px-4 py-2 text-primary ${
-                                responseLength === ResponseLength.Long
-                                    ? "bg-luxury"
-                                    : "bg-accent"
-                            }`}
-                        >
-                            Long
-                        </button>
-                    </div>
-                </div>
-
-                <div className="flex justify-center">
-                    <button
-                        type="submit"
-                        disabled={loading || !selectedCharacter}
-                        className="bg-coral hover:bg-darkCoral text-primary px-8 py-3 w-24 rounded-lg font-semibold transition disabled:opacity-50"
-                    >
-                        {loading ? "Asking..." : "Ask"}
-                    </button>
-                </div>
-            </form>
             <LoadingSpinner loading={loading} />
             <PanelResponse
                 character={result?.selectedCharacter}
