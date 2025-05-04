@@ -52,49 +52,52 @@ export default function Home() {
     };
 
     return (
-        <main className="max-w-xl mx-auto px-4 py-10">
-            <h1 className="text-3xl font-bold mb-6 text-center">
+        <main className="max-w-2xl mx-auto px-6 py-16">
+            <h1 className="text-4xl font-serif font-semibold mb-10 text-center text-accent tracking-wide">
                 Ask the Panel
             </h1>
 
-            <form onSubmit={handleSubmit} className="mb-6">
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white/70 backdrop-blur-md p-6 rounded-xl shadow-md border border-secondary mb-8"
+            >
                 <textarea
-                    className="w-full border rounded-lg p-3 mb-4"
-                    rows={4}
+                    className="w-full border border-muted rounded-lg p-4 mb-6 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                    rows={5}
                     placeholder="Ask your question..."
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
                     required
                 />
 
-                <div className="flex flex-wrap gap-4 mb-4 justify-center">
-                    {charactersList.map((char) => (
+                <div className="flex flex-wrap gap-4 mb-6 justify-center">
+                    {charactersList.map((character) => (
                         <button
                             type="button"
-                            key={char.id}
-                            onClick={() => setSelectedCharacter(char.id)}
-                            className={`px-4 py-2 rounded-full border cursor-pointer ${
-                                selectedCharacter === char.id
-                                    ? "bg-blue-600 text-white"
-                                    : "bg-gray-100 text-gray-800"
+                            key={character.id}
+                            onClick={() => setSelectedCharacter(character.id)}
+                            className={`px-5 py-2 rounded-full border text-sm font-medium transition ${
+                                selectedCharacter === character.id
+                                    ? "bg-luxury text-primary"
+                                    : "bg-accent border-muted text-primary hover:bg-luxury hover:text-primary"
                             }`}
                         >
-                            {char.label}
+                            {character.label}
                         </button>
                     ))}
                 </div>
 
                 <div className="mb-6 flex justify-center">
-                    <div className="flex border rounded-full overflow-hidden text-sm">
+                    <div className="flex border border-accent rounded-full overflow-hidden text-sm">
                         <button
                             type="button"
                             onClick={() =>
                                 setResponseLength(ResponseLength.Short)
                             }
-                            className={`px-4 py-2 transition-all duration-200 cursor-pointer ${
+                            className={`px-4 py-2 text-primary ${
                                 responseLength === ResponseLength.Short
-                                    ? "bg-green-600 text-white"
-                                    : "bg-white text-gray-700"
+                                    ? "bg-luxury"
+                                    : "bg-accent"
                             }`}
                         >
                             Short
@@ -104,10 +107,10 @@ export default function Home() {
                             onClick={() =>
                                 setResponseLength(ResponseLength.Long)
                             }
-                            className={`px-4 py-2 transition-all duration-200 cursor-pointer ${
+                            className={`px-4 py-2 text-primary ${
                                 responseLength === ResponseLength.Long
-                                    ? "bg-green-600 text-white"
-                                    : "bg-white text-gray-700"
+                                    ? "bg-luxury"
+                                    : "bg-accent"
                             }`}
                         >
                             Long
@@ -115,21 +118,21 @@ export default function Home() {
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={loading || !selectedCharacter}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
-                >
-                    {loading ? "Asking..." : "Ask"}
-                </button>
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading || !selectedCharacter}
+                        className="bg-accent hover:bg-luxury text-primary px-8 py-3 rounded-lg font-semibold transition disabled:opacity-50"
+                    >
+                        {loading ? "Asking..." : "Ask"}
+                    </button>
+                </div>
             </form>
 
-            {result?.answer && (
-                <PanelResponse
-                    character={result.selectedCharacter ?? ""}
-                    answer={result.answer}
-                />
-            )}
+            <PanelResponse
+                character={result?.selectedCharacter}
+                answer={result?.answer}
+            />
         </main>
     );
 }

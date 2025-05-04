@@ -2,15 +2,15 @@ import { CharacterId } from "@/types/characters";
 import React from "react";
 
 type PanelResponseProps = {
-    character: CharacterId;
-    answer: string;
+    character?: CharacterId;
+    answer?: string;
 };
 
 const characterNames: Record<string, string> = {
-    [CharacterId.Heiress]: "Wealthy Heiress",
-    [CharacterId.Priest]: "Italian Priest",
-    [CharacterId.Tarot]: "Greek Tarot Reader",
-    [CharacterId.Bro]: "Clueless Bro",
+    [CharacterId.Heiress]: "Tiffany Vandergilt",
+    [CharacterId.Priest]: "Don Andrea Bellucci",
+    [CharacterId.Tarot]: "Sibylla Nyx",
+    [CharacterId.Bro]: "Chad 'Stacks' Ellison",
 };
 
 export const PanelResponse: React.FC<PanelResponseProps> = ({
@@ -20,7 +20,9 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
     return (
         <div className="border p-4 rounded-xl shadow-md bg-white mb-4">
             <h2 className="text-xl font-semibold mb-2">
-                {characterNames[character]}
+                {character
+                    ? `${characterNames[character]} says:`
+                    : "The panel awaits your question"}
             </h2>
             <p className="text-gray-700 whitespace-pre-line">{answer}</p>
         </div>
