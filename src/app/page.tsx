@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PanelResponse } from "@/components/PanelResponse";
 import { CharacterId } from "@/types/characters";
 import { ResponseLength } from "@/types/responseLength";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 const charactersList = [
     { id: CharacterId.Heiress, label: "Wealthy Heiress" },
@@ -128,16 +129,7 @@ export default function Home() {
                     </button>
                 </div>
             </form>
-            <div className="h-12 flex justify-center items-center mt-3 mb-3">
-                {loading && (
-                    <img
-                        src="images/coral.png"
-                        alt="Loading..."
-                        className="h-12 w-12 animate-spin rounded-full border border-dotted border-accent"
-                    />
-                )}
-            </div>
-
+            <LoadingSpinner loading={loading} />
             <PanelResponse
                 character={result?.selectedCharacter}
                 answer={result?.answer}
