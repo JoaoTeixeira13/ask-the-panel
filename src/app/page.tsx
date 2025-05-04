@@ -52,7 +52,7 @@ export default function Home() {
 
             setResult(validatedResponse.data);
         } catch (error) {
-            setError("An error occured when submitting the form.");
+            setError(`An error occured when submitting the form: ${error}`);
         } finally {
             setLoading(false);
         }
