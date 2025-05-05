@@ -46,7 +46,6 @@ export default function Home() {
 
             if (!validatedResponse.success) {
                 setError("Unexpected data format received from the panel.");
-                setLoading(false);
                 return;
             }
 
