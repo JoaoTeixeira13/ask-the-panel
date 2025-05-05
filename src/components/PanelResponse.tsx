@@ -11,7 +11,7 @@ type PanelResponseProps = {
 const characterNames: Record<string, string> = {
     [CharacterId.Heiress]: "Tiffany Vandergilt",
     [CharacterId.Priest]: "Don Andrea Bellucci",
-    [CharacterId.Tarot]: "Sibylla Nyx",
+    [CharacterId.Tarot]: "Sibylla Naxos",
     [CharacterId.Bro]: "Chad 'Stacks' Ellison",
 };
 
