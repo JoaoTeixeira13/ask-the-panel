@@ -78,8 +78,10 @@ export default function Home() {
             <LoadingSpinner loading={loading} />
             {error && <ErrorMessage message={error} />}
             <PanelResponse
-                character={result?.selectedCharacter}
+                answerCharacter={result?.selectedCharacter}
                 answer={result?.answer}
+                loading={loading}
+                selectedCharatcer={selectedCharacter}
             />
         </main>
     );
