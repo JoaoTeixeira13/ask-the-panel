@@ -22,7 +22,7 @@ export function ResponseLengthSelector({
                             : "bg-accent"
                     }`}
                 >
-                    Short
+                    Short answer
                 </button>
                 <button
                     type="button"
@@ -33,7 +33,7 @@ export function ResponseLengthSelector({
                             : "bg-accent"
                     }`}
                 >
-                    Long
+                    Long answer
                 </button>
             </div>
         </div>
