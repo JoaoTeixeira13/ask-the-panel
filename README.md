@@ -16,11 +16,7 @@ Ask the Panel is a playful and personality-driven Q&A GenAI app. Users can ask a
 
 You can choose between a short or long response based on how detailed you want the answer to be.
 
-![Demo](./public/readMe/ask-the-pannel3.gif)
-
-<br>
-
-![Demo](./public/readMe/ask-the-pannel1.gif)
+![Demo](./public/readMe/askThePanel1.gif)
 
 ## Features
 
