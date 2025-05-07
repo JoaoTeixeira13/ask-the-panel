@@ -13,9 +13,7 @@ export async function POST(req: NextRequest) {
             selectedCharacter,
             responseLength
         );
-
-        const systemPrompt = `${characterPrompt}\n\n${LENGTH_INSTRUCTIONS[responseLength]}`;
-
+        
         const response = await fetch(config.openRouterUrl, {
             method: "POST",
             headers: {
@@ -27,7 +25,7 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify({
                 model: config.model,
                 messages: [
-                    { role: "system", content: systemPrompt },
+                    { role: "system", content: characterPrompt },
                     { role: "user", content: question },
                 ],
             }),

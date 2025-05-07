@@ -103,7 +103,13 @@ export function getCharacterPrompt(
     responseLength: ResponseLength
 ): string {
     const prompt = CHARACTER_PROMPTS[characterId];
-    return prompt
-        ? prompt[responseLength]
-        : CHARACTER_PROMPTS[CharacterId.Heiress][ResponseLength.Long];
+    const lengthInstructions = LENGTH_INSTRUCTIONS[responseLength];
+
+    const defaultPrompt = `${
+        CHARACTER_PROMPTS[CharacterId.Heiress][ResponseLength.Long]
+    }\n\n${LENGTH_INSTRUCTIONS[ResponseLength.Long]}`;
+
+    return prompt && lengthInstructions
+        ? `${prompt[responseLength]}\n\n${lengthInstructions}`
+        : defaultPrompt;
 }
