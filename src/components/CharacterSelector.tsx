@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { characters } from "@/lib/characters";
 import { CharacterId } from "@/types/characters";
+import { Tooltip } from "./Tooltip";
 
 interface CharacterSelectorProps {
     selectedCharacter: CharacterId;
@@ -48,37 +49,38 @@ export function CharacterSelector({
                     const quote = quotes[character.id];
 
                     return (
-                        <button
-                            key={character.id}
-                            type="button"
-                            onClick={() => onSelect(character.id)}
-                            className="flex flex-col items-center group relative animate-fade-in"
-                            title={character.tooltip}
-                        >
-                            <div
-                                className={`w-24 h-24 rounded-full overflow-hidden border-4 transition-all duration-300 ${
-                                    isSelected
-                                        ? "border-coral shadow-md shadow-coral/80 scale-105 border-6"
-                                        : "border-muted group-hover:border-coral group-hover:scale-105"
-                                }`}
+                        <Tooltip key={character.id} content={character.tooltip}>
+                            <button
+                                key={character.id}
+                                type="button"
+                                onClick={() => onSelect(character.id)}
+                                className="flex flex-col items-center group relative animate-fade-in"
                             >
-                                <Image
-                                    src={character.image}
-                                    alt={character.name}
-                                    width={96}
-                                    height={96}
-                                    className="object-cover w-full h-full"
-                                />
-                            </div>
-                            <div className="text-sm font-semibold mt-3 mb-3 text-center text-luxury">
-                                {character.name}
-                            </div>
-                            {quote && (
-                                <div className="text-xs italic text-muted text-center mt-1 px-2">
-                                    {`"${quote}"`}
+                                <div
+                                    className={`w-24 h-24 rounded-full overflow-hidden border-4 transition-all duration-300 ${
+                                        isSelected
+                                            ? "border-coral shadow-md shadow-coral/80 scale-105 border-6"
+                                            : "border-muted group-hover:border-coral group-hover:scale-105"
+                                    }`}
+                                >
+                                    <Image
+                                        src={character.image}
+                                        alt={character.name}
+                                        width={96}
+                                        height={96}
+                                        className="object-cover w-full h-full"
+                                    />
                                 </div>
-                            )}
-                        </button>
+                                <div className="text-sm font-semibold mt-3 mb-3 text-center text-luxury">
+                                    {character.name}
+                                </div>
+                                {quote && (
+                                    <div className="text-xs italic text-muted text-center mt-1 px-2">
+                                        {`"${quote}"`}
+                                    </div>
+                                )}
+                            </button>
+                        </Tooltip>
                     );
                 })}
             </div>
