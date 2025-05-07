@@ -60,7 +60,7 @@ export function CharacterSelector({
                                     className={`w-24 h-24 rounded-full overflow-hidden border-4 transition-all duration-300 ${
                                         isSelected
                                             ? "border-coral shadow-md shadow-coral/80 scale-105 border-6"
-                                            : "border-muted group-hover:border-coral group-hover:scale-105"
+                                            : "border-muted group-hover:border-darkCoral group-hover:scale-105"
                                     }`}
                                 >
                                     <Image

@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useId, useRef, useState } from "react";
 
 interface TooltipProps {
     content: string;
@@ -8,18 +8,36 @@ interface TooltipProps {
 
 export function Tooltip({ content, children }: TooltipProps) {
     const [visible, setVisible] = useState(false);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const tooltipId = useId();
+
+    const handleMouseEnter = () => {
+        timeoutRef.current = setTimeout(() => setVisible(true), 1500);
+    };
+
+    const handleMouseLeave = () => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        setVisible(false);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
 
     return (
         <div
             className="relative inline-block"
-            onMouseEnter={() => setVisible(true)}
-            onMouseLeave={() => setVisible(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            aria-describedby={tooltipId}
         >
             {children}
             <div
                 className={`absolute z-50 w-52 text-xs bg-luxury border border-muted rounded-md shadow-lg px-2 py-3 text-primary text-center bottom-full left-1/2 -translate-x-1/2 mb-3 transition-opacity duration-200 ${
                     visible
-                        ? "opacity-100 pointer-events-auto"
+                        ? "opacity-95 pointer-events-auto"
                         : "opacity-0 pointer-events-none"
                 }`}
             >
