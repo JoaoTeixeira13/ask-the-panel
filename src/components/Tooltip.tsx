@@ -35,7 +35,7 @@ export function Tooltip({ content, children }: TooltipProps) {
         >
             {children}
             <div
-                className={`absolute z-50 w-52 text-xs bg-luxury border border-muted rounded-md shadow-lg px-2 py-3 text-primary text-center bottom-full left-1/2 -translate-x-1/2 mb-3 transition-opacity duration-200 ${
+                className={`absolute z-50 w-52 text-xs bg-luxury border border-muted rounded-md shadow-lg px-2 py-3 text-primary text-center bottom-full left-1/2 -translate-x-1/2 mb-3 transition-opacity duration-200 hidden pointer-fine:block ${
                     visible
                         ? "opacity-95 pointer-events-auto"
                         : "opacity-0 pointer-events-none"
