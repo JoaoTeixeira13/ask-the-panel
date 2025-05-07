@@ -36,7 +36,7 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
     selectedCharatcer,
 }) => {
     return (
-        <div className="border border-accent p-4 rounded-xl shadow-md bg-background mb-4">
+        <div className="border border-primary p-4 rounded-xl shadow-md bg-background mb-4">
             <h2 className="text-xl font-semibold mb-2 text-luxury">
                 {getPanelTitle(loading, answerCharacter, selectedCharatcer)}
             </h2>

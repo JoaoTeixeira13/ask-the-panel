@@ -25,6 +25,18 @@ export default function Home() {
         e.preventDefault();
         if (!selectedCharacter) return;
 
+        if (question.trim().length < 10) {
+            setError("Your question is too short. Please provide more detail.");
+            return;
+        }
+
+        if (question.length > 160) {
+            setError(
+                "Your question is too long. Try to keep it under 160 characters."
+            );
+            return;
+        }
+
         setLoading(true);
         setResult(null);
         setError(null);

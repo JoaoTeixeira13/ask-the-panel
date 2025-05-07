@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+    --lightBackground: #f7f4ee;
     --background: #fbf9f2;
     --foreground: #1a1a1a;
     --primary: #f0e5d8;
@@ -13,6 +14,7 @@
 }
 
 @theme inline {
+    --color-lightBackground: var(--lightBackground);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-primary: var(--primary);
