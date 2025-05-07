@@ -75,7 +75,7 @@ export function CharacterSelector({
                             </div>
                             {quote && (
                                 <div className="text-xs italic text-muted text-center mt-1 px-2">
-                                    "{quote}"
+                                    {`"${quote}"`}
                                 </div>
                             )}
                         </button>

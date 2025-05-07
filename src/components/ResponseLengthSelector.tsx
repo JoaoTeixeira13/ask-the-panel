@@ -13,7 +13,7 @@ export function ResponseLengthSelector({
     return (
         <>
             <p className="font-semibold mt-2 mb-4 text-center text-luxury">
-                Choose how much they say{" "}
+                Choose how much they say
             </p>
             <div className="mb-6 flex justify-center">
                 <div className="flex border border-accent rounded-full overflow-hidden text-sm">
