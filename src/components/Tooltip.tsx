@@ -14,8 +14,6 @@ export function Tooltip({ content, children }: TooltipProps) {
             className="relative inline-block"
             onMouseEnter={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
-            onTouchStart={() => setVisible((prev) => !prev)}
-            onTouchEnd={(e) => e.stopPropagation()}
         >
             {children}
             <div
