@@ -1,4 +1,4 @@
-import { getCharacterPrompt, LENGTH_INSTRUCTIONS } from "@/lib/characters";
+import { getCharacterPrompt } from "@/lib/characters";
 import { config } from "@/lib/config";
 import { PanelRequestSchema } from "@/types/panel";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             selectedCharacter,
             responseLength
         );
-        
+
         const response = await fetch(config.openRouterUrl, {
             method: "POST",
             headers: {
