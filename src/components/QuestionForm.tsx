@@ -25,12 +25,6 @@ export function QuestionForm({
     onSubmit,
     loading,
 }: QuestionFormProps) {
-    const charactersList = [
-        { id: CharacterId.Heiress, label: "Wealthy Heiress" },
-        { id: CharacterId.Priest, label: "Italian Priest" },
-        { id: CharacterId.Tarot, label: "Greek Tarot Reader" },
-        { id: CharacterId.Bro, label: "Crypto Bro" },
-    ];
     return (
         <form
             onSubmit={onSubmit}
@@ -46,7 +40,6 @@ export function QuestionForm({
             />
 
             <CharacterSelector
-                characters={charactersList}
                 selectedCharacter={selectedCharacter}
                 onSelect={onSelectCharacter}
             />

@@ -1,33 +1,87 @@
 "use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { characters } from "@/lib/characters";
 import { CharacterId } from "@/types/characters";
 
 interface CharacterSelectorProps {
-    characters: { id: CharacterId; label: string }[];
     selectedCharacter: CharacterId;
     onSelect: (id: CharacterId) => void;
 }
 
 export function CharacterSelector({
-    characters,
     selectedCharacter,
     onSelect,
 }: CharacterSelectorProps) {
+    const [quotes, setQuotes] = useState<Record<CharacterId, string>>({
+        heiress: "",
+        priest: "",
+        tarot: "",
+        bro: "",
+    });
+
+    useEffect(() => {
+        const quoteMap: Record<CharacterId, string> = {
+            heiress: "",
+            priest: "",
+            tarot: "",
+            bro: "",
+        };
+
+        characters.forEach((character) => {
+            quoteMap[character.id] =
+                character.quotes[
+                    Math.floor(Math.random() * character.quotes.length)
+                ];
+        });
+        setQuotes(quoteMap);
+    }, []);
+
     return (
-        <div className="flex flex-wrap gap-4 mb-6 justify-center">
-            {characters.map((character) => (
-                <button
-                    type="button"
-                    key={character.id}
-                    onClick={() => onSelect(character.id)}
-                    className={`px-5 py-2 rounded-full border text-sm font-medium transition ${
-                        selectedCharacter === character.id
-                            ? "bg-luxury text-primary"
-                            : "bg-accent border-muted text-primary hover:bg-luxury hover:text-primary"
-                    }`}
-                >
-                    {character.label}
-                </button>
-            ))}
-        </div>
+        <>
+            <p className="font-semibold mt-2 mb-4 text-center text-luxury">
+                Choose your advisor
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8 justify-items-center">
+                {characters.map((character) => {
+                    const isSelected = selectedCharacter === character.id;
+                    const quote = quotes[character.id];
+
+                    return (
+                        <button
+                            key={character.id}
+                            type="button"
+                            onClick={() => onSelect(character.id)}
+                            className="flex flex-col items-center group relative animate-fade-in"
+                            title={character.tooltip}
+                        >
+                            <div
+                                className={`w-24 h-24 rounded-full overflow-hidden border-4 transition-all duration-300 ${
+                                    isSelected
+                                        ? "border-coral shadow-md shadow-coral/80 scale-105 border-6"
+                                        : "border-muted group-hover:border-coral group-hover:scale-105"
+                                }`}
+                            >
+                                <Image
+                                    src={character.image}
+                                    alt={character.name}
+                                    width={96}
+                                    height={96}
+                                    className="object-cover w-full h-full"
+                                />
+                            </div>
+                            <div className="text-sm font-semibold mt-3 mb-3 text-center text-luxury">
+                                {character.name}
+                            </div>
+                            {quote && (
+                                <div className="text-xs italic text-muted text-center mt-1 px-2">
+                                    "{quote}"
+                                </div>
+                            )}
+                        </button>
+                    );
+                })}
+            </div>
+        </>
     );
 }

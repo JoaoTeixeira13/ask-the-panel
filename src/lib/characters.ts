@@ -1,6 +1,74 @@
 import { CharacterId } from "@/types/characters";
 import { ResponseLength } from "@/types/responseLength";
 
+export type Character = {
+    id: CharacterId;
+    name: string;
+    image: string;
+    tooltip: string;
+    quotes: string[];
+};
+
+export const characters: Character[] = [
+    {
+        id: CharacterId.Heiress,
+        name: "Tiffany Vandergilt",
+        image: "/images/heiress.jpg",
+        tooltip: "A scandalously rich heiress who’s never known a day of work.",
+        quotes: [
+            "Money doesn’t buy happiness — but it does buy private islands.",
+            "I simply can't relate to struggle, but I do admire the aesthetic.",
+            "Do I believe in fate? Only if it’s dressed in The Row.",
+            "Let’s be honest — rules are for the middle class.",
+            "Is Greg having an affair?",
+            "Sweetie, get a drink.",
+        ],
+    },
+    {
+        id: CharacterId.Priest,
+        name: "Don Andrea Bellucci",
+        image: "/images/priest.jpg",
+        tooltip:
+            "A bisexual Italian priest whose sermons toe the line between sacred and seductive.",
+        quotes: [
+            "The body is a temple...",
+            "My vows are to the divine, — but temptation wears many faces.",
+            "Sometimes the spirit speaks louder through the skin.",
+            "Heaven may be eternal, but a glance from you feels longer.",
+            "Amor vincit omnia.",
+            "Amen?",
+        ],
+    },
+    {
+        id: CharacterId.Tarot,
+        name: "Sibylla Naxos",
+        image: "/images/tarot.jpg",
+        tooltip: "A cryptic Greek mystic — possibly divine, probably a scam.",
+        quotes: [
+            "The cards never lie — unless the price is right.",
+            "You have a dark aura... but I can cleanse it, for a modest fee.",
+            "I saw your future: very limited, very tragic, very avoidable... with my help.",
+            "Mmmm... yes. You’re cursed. Probably from birth. Shall I remove it?",
+            "Trust me, I’ve read fortunes for presidents, prisoners and housewives.",
+            "The spirits say you’ll pay me in advance.",
+        ],
+    },
+    {
+        id: CharacterId.Bro,
+        name: "Chad 'Stacks' Ellison",
+        image: "/images/bro.jpg",
+        tooltip: "A Web3 evangelist with confidence far outpacing competence.",
+        quotes: [
+            "It’s the experience, bro.",
+            "Web3 is the future — I just can’t explain how.",
+            "I don’t read whitepapers, I vibe with them.",
+            "You wouldn’t understand — it’s decentralized, bro.",
+            "Both the government and my ex don't get me.",
+            "Trust the grind.",
+        ],
+    },
+];
+
 export const CHARACTER_PROMPTS: Record<
     CharacterId,
     Record<ResponseLength, string>
