@@ -8,6 +8,7 @@ import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { QuestionForm } from "@/components/QuestionForm";
 import { PromptResultSchema, PromptResut } from "@/types/promptResult";
 import { ErrorMessage } from "@/components/ErrorMessage";
+import { QUESTION_MAX_LENGTH, QUESTION_MIN_LENGTH } from "@/lib/constants";
 
 export default function Home() {
     const [question, setQuestion] = useState("");
@@ -25,14 +26,14 @@ export default function Home() {
         e.preventDefault();
         if (!selectedCharacter) return;
 
-        if (question.trim().length < 10) {
+        if (question.trim().length < QUESTION_MIN_LENGTH) {
             setError("Your question is too short. Please provide more detail.");
             return;
         }
 
-        if (question.length > 160) {
+        if (question.length > QUESTION_MAX_LENGTH) {
             setError(
-                "Your question is too long. Try to keep it under 160 characters."
+                `Your question is too long. Try to keep it under ${QUESTION_MAX_LENGTH} characters.`
             );
             return;
         }

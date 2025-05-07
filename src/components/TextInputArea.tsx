@@ -1,5 +1,6 @@
 "use client";
 
+import { QUESTION_MAX_LENGTH } from "@/lib/constants";
 import React from "react";
 
 interface TextInputAreaProps {
@@ -11,7 +12,7 @@ interface TextInputAreaProps {
 export const TextInputArea: React.FC<TextInputAreaProps> = ({
     value,
     onChange,
-    maxLength = 160,
+    maxLength = QUESTION_MAX_LENGTH,
 }) => {
     return (
         <div>
