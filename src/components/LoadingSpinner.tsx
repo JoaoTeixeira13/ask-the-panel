@@ -12,8 +12,8 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ loading }) => {
                 <Image
                     src="/images/coral.png"
                     alt="Loading..."
-                    width={48}
-                    height={48}
+                    width={96}
+                    height={96}
                     className="animate-spin rounded-full border border-dotted border-accent"
                 />
             )}

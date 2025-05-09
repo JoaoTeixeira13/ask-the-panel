@@ -1,14 +1,13 @@
 "use client";
-
-import { useState } from "react";
+import { CharacterSelector } from "@/components/CharacterSelector";
+import { ChatInput } from "@/components/ChatInput";
 import { PanelResponse } from "@/components/PanelResponse";
-import { CharacterId } from "@/types/characters";
-import { ResponseLength } from "@/types/responseLength";
-import { LoadingSpinner } from "@/components/LoadingSpinner";
-import { QuestionForm } from "@/components/QuestionForm";
-import { PromptResultSchema, PromptResut } from "@/types/promptResult";
-import { ErrorMessage } from "@/components/ErrorMessage";
 import { QUESTION_MAX_LENGTH, QUESTION_MIN_LENGTH } from "@/lib/constants";
+import { CharacterId } from "@/types/characters";
+import { PromptResultSchema, PromptResut } from "@/types/promptResult";
+import { ResponseLength } from "@/types/responseLength";
+import { useState } from "react";
+import { useMediaQuery } from "./hooks/useMediaQuery";
 
 export default function Home() {
     const [question, setQuestion] = useState("");
@@ -21,6 +20,8 @@ export default function Home() {
     const [result, setResult] = useState<PromptResut | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+
+    const isMobile = useMediaQuery("(max-width: 640px)");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -54,7 +55,6 @@ export default function Home() {
             });
 
             const rawData = await response.json();
-
             const validatedResponse = PromptResultSchema.safeParse(rawData);
 
             if (!validatedResponse.success) {
@@ -64,36 +64,49 @@ export default function Home() {
 
             setResult(validatedResponse.data);
         } catch (error) {
-            setError(`An error occured when submitting the form: ${error}`);
+            setError(`An error occurred when submitting the form: ${error}`);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <main className="max-w-2xl mx-auto px-6 py-16">
-            <h1 className="text-4xl font-serif font-semibold mb-10 text-center text-luxury tracking-wide">
-                Ask the Panel
-            </h1>
+        <main
+            className={`flex flex-col h-screen max-w-2xl mx-auto ${
+                isMobile ? "p-6" : "p-4"
+            }`}
+        >
+            <div className="mb-4">
+                <h1 className="text-4xl font-serif text-center mb-6 text-luxury">
+                    Ask the Panel
+                </h1>
+                <CharacterSelector
+                    selectedCharacter={selectedCharacter}
+                    onSelect={setSelectedCharacter}
+                />
+            </div>
 
-            <QuestionForm
-                question={question}
-                onQuestionChange={setQuestion}
-                selectedCharacter={selectedCharacter}
-                onSelectCharacter={setSelectedCharacter}
-                responseLength={responseLength}
-                onResponseLengthChange={setResponseLength}
-                onSubmit={handleSubmit}
-                loading={loading}
-            />
-
-            <LoadingSpinner loading={loading} />
-            {error && <ErrorMessage message={error} />}
             <PanelResponse
                 answerCharacter={result?.selectedCharacter}
                 answer={result?.answer}
                 loading={loading}
                 selectedCharatcer={selectedCharacter}
+                error={error}
+            />
+
+            <ChatInput
+                question={question}
+                onChange={setQuestion}
+                onSubmit={handleSubmit}
+                responseLength={responseLength}
+                onToggleResponseLength={() =>
+                    setResponseLength(
+                        responseLength === ResponseLength.Short
+                            ? ResponseLength.Long
+                            : ResponseLength.Short
+                    )
+                }
+                disabled={loading || !selectedCharacter}
             />
         </main>
     );

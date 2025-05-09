@@ -1,11 +1,15 @@
+"use client";
 import { CharacterId } from "@/types/characters";
 import React from "react";
+import { ErrorMessage } from "./ErrorMessage";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 type PanelResponseProps = {
     answerCharacter?: CharacterId;
     answer?: string;
     loading: boolean;
     selectedCharatcer?: string;
+    error: string | null;
 };
 
 const characterNames: Record<string, string> = {
@@ -34,13 +38,26 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
     answer,
     loading,
     selectedCharatcer,
+    error,
 }) => {
     return (
-        <div className="border border-primary p-4 rounded-xl shadow-md bg-background mb-4">
-            <h2 className="text-xl font-semibold mb-2 text-luxury">
+        <div className="flex-1 relative overflow-y-auto mb-2 border border-primary rounded-xl shadow-md p-4 bg-background shadow-inner">
+            <h2 className="text-xl font-semibold mb-4 text-luxury z-10 relative">
                 {getPanelTitle(loading, answerCharacter, selectedCharatcer)}
             </h2>
-            <p className="text-gray-700 whitespace-pre-line">{answer}</p>
+
+            {loading ? (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <LoadingSpinner loading={loading} />
+                </div>
+            ) : (
+                <>
+                    <p className="text-gray-700 whitespace-pre-line">
+                        {answer}
+                    </p>
+                    {error && <ErrorMessage message={error} />}
+                </>
+            )}
         </div>
     );
 };
