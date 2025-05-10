@@ -8,7 +8,7 @@ export const MobileSubmitButton = ({ disabled }: MobileSubmitButtonProps) => {
         <button
             type="submit"
             disabled={disabled}
-            className="text-coral hover:text-darkCoral"
+            className="text-coral !px-1.5 hover:text-darkCoral"
             aria-label="Send"
         >
             <ArrowUpCircle className="w-6 h-6" />

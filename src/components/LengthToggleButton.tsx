@@ -3,6 +3,7 @@
 import { MessageCircle, MessageSquare } from "lucide-react";
 import { Tooltip } from "./Tooltip";
 import { ResponseLength } from "@/types/responseLength";
+import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 
 type LengthToggleButtonProps = {
     currentResponseLength: ResponseLength;
@@ -19,6 +20,8 @@ export const LengthToggleButton = ({
     currentResponseLength,
     onToggleResponseLength,
 }: LengthToggleButtonProps) => {
+    const isMobile = useMediaQuery();
+    
     return (
         <Tooltip
             content={getTooltipLabel(currentResponseLength)}
@@ -28,7 +31,9 @@ export const LengthToggleButton = ({
                 <button
                     type="button"
                     onClick={onToggleResponseLength}
-                    className="text-muted hover:text-coral"
+                    className={`text-muted hover:text-coral ${
+                        isMobile && "!px-2"
+                    }`}
                     aria-label="Toggle answer length"
                 >
                     {currentResponseLength === ResponseLength.Short ? (
