@@ -1,0 +1,28 @@
+# https://www.robotstxt.org/robotstxt.html
+# Allow Googlebot (Google)
+User-agent: Googlebot
+Disallow:
+
+# Allow Bingbot (Bing / Ecosia)
+User-agent: Bingbot
+Disallow:
+
+# Allow DuckDuckBot (DuckDuckGo, private US-based)
+User-agent: DuckDuckBot
+Disallow:
+
+# Allow Qwantify (Qwant, France)
+User-agent: Qwantify
+Disallow:
+
+# Allow MojeekBot (Mojeek, UK)
+User-agent: MojeekBot
+Disallow:
+
+# Allow SeznamBot (Seznam, Czech Republic)
+User-agent: SeznamBot
+Disallow:
+
+# Block all other bots
+User-agent: *
+Disallow: /
