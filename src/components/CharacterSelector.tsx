@@ -15,7 +15,7 @@ export const CharacterSelector = ({
     selectedCharacter,
     onSelect,
 }: CharacterSelectorProps) => {
-    const isMobile = useMediaQuery("(max-width: 640px)");
+    const isMobile = useMediaQuery();
     const [quotes, setQuotes] = useState<CharacterQuote>({
         heiress: "",
         priest: "",

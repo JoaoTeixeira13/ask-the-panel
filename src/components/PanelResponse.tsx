@@ -10,6 +10,7 @@ type PanelResponseProps = {
     loading: boolean;
     selectedCharatcer?: string;
     error: string | null;
+    onSetError: (value: string | null) => void;
 };
 
 const characterNames: Record<string, string> = {
@@ -39,6 +40,7 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
     loading,
     selectedCharatcer,
     error,
+    onSetError,
 }) => {
     return (
         <div className="flex-1 relative overflow-y-auto mb-2 border border-primary rounded-xl shadow-md p-4 bg-background shadow-inner">
@@ -55,7 +57,9 @@ export const PanelResponse: React.FC<PanelResponseProps> = ({
                     <p className="text-gray-700 whitespace-pre-line">
                         {answer}
                     </p>
-                    {error && <ErrorMessage message={error} />}
+                    {error && (
+                        <ErrorMessage message={error} onSetError={onSetError} />
+                    )}
                 </>
             )}
         </div>

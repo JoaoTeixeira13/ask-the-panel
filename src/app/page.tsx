@@ -92,6 +92,7 @@ const Home = () => {
                 loading={loading}
                 selectedCharatcer={selectedCharacter}
                 error={error}
+                onSetError={setError}
             />
 
             <ChatInput
