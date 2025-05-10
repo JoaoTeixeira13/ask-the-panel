@@ -21,7 +21,7 @@ export const LengthToggleButton = ({
     onToggleResponseLength,
 }: LengthToggleButtonProps) => {
     const isMobile = useMediaQuery();
-    
+
     return (
         <Tooltip
             content={getTooltipLabel(currentResponseLength)}
@@ -32,7 +32,7 @@ export const LengthToggleButton = ({
                     type="button"
                     onClick={onToggleResponseLength}
                     className={`text-muted hover:text-coral ${
-                        isMobile && "!px-2"
+                        isMobile && "!px-2.5"
                     }`}
                     aria-label="Toggle answer length"
                 >
