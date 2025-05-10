@@ -1,7 +1,8 @@
 "use client";
+import { DEFAULT_MOBILE_MEDIA_QUERY } from "@/lib/constants";
 import { useState, useEffect } from "react";
 
-export function useMediaQuery(query: string): boolean {
+export const useMediaQuery = (query = DEFAULT_MOBILE_MEDIA_QUERY) => {
     const [matches, setMatches] = useState(false);
 
     useEffect(() => {
@@ -14,4 +15,4 @@ export function useMediaQuery(query: string): boolean {
     }, [query]);
 
     return matches;
-}
+};

@@ -1,7 +1,9 @@
 "use client";
 import { ArrowUpCircle } from "lucide-react";
 
-export function MobileSubmitButton({ disabled }: { disabled: boolean }) {
+type MobileSubmitButtonProps = { disabled: boolean };
+
+export const MobileSubmitButton = ({ disabled }: MobileSubmitButtonProps) => {
     return (
         <button
             type="submit"
@@ -12,4 +14,4 @@ export function MobileSubmitButton({ disabled }: { disabled: boolean }) {
             <ArrowUpCircle className="w-6 h-6" />
         </button>
     );
-}
+};

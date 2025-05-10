@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { X, AlertTriangle } from "lucide-react";
 
 type ErrorMessageProps = {
     message: string;
 };
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+export const ErrorMessage = ({ message }: ErrorMessageProps) => {
     const [visible, setVisible] = useState(true);
 
     if (!message || !visible) return null;

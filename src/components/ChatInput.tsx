@@ -22,7 +22,7 @@ export function ChatInput({
     onToggleResponseLength,
     disabled,
 }: ChatInputProps) {
-    const isMobile = useMediaQuery("(max-width: 640px)");
+    const isMobile = useMediaQuery();
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (!isMobile && e.key === "Enter" && !e.shiftKey) {

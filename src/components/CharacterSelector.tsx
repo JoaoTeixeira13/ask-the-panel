@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { characters } from "@/lib/characters";
-import { CharacterId } from "@/types/characters";
+import { CharacterId, CharacterQuote } from "@/types/characters";
 import { Tooltip } from "./Tooltip";
 import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 
@@ -11,13 +11,12 @@ type CharacterSelectorProps = {
     onSelect: (id: CharacterId) => void;
 };
 
-export function CharacterSelector({
+export const CharacterSelector = ({
     selectedCharacter,
     onSelect,
-}: CharacterSelectorProps) {
+}: CharacterSelectorProps) => {
     const isMobile = useMediaQuery("(max-width: 640px)");
-
-    const [quotes, setQuotes] = useState<Record<CharacterId, string>>({
+    const [quotes, setQuotes] = useState<CharacterQuote>({
         heiress: "",
         priest: "",
         tarot: "",
@@ -25,11 +24,8 @@ export function CharacterSelector({
     });
 
     useEffect(() => {
-        const quoteMap: Record<CharacterId, string> = {
-            heiress: "",
-            priest: "",
-            tarot: "",
-            bro: "",
+        const quoteMap: CharacterQuote = {
+            ...quotes,
         };
 
         characters.forEach((character) => {
@@ -52,7 +48,11 @@ export function CharacterSelector({
     };
 
     return (
-        <div className="grid justify-items-center bg-background rounded-xl p-2 grid-cols-4 gap-6">
+        <div
+            className={`grid justify-items-center bg-background rounded-xl p-2 grid-cols-4 gap-6 ${
+                !isMobile ? "h-68" : "p-4"
+            }`}
+        >
             {characters.map((character) => {
                 const isSelected = selectedCharacter === character.id;
                 const quote = quotes[character.id];
@@ -92,4 +92,4 @@ export function CharacterSelector({
             })}
         </div>
     );
-}
+};

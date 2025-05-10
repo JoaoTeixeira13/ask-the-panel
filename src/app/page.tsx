@@ -9,7 +9,7 @@ import { ResponseLength } from "@/types/responseLength";
 import { useState } from "react";
 import { useMediaQuery } from "./hooks/useMediaQuery";
 
-export default function Home() {
+const Home = () => {
     const [question, setQuestion] = useState("");
     const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>(
         CharacterId.Heiress
@@ -21,7 +21,7 @@ export default function Home() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const isMobile = useMediaQuery("(max-width: 640px)");
+    const isMobile = useMediaQuery();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -110,4 +110,5 @@ export default function Home() {
             />
         </main>
     );
-}
+};
+export default Home;

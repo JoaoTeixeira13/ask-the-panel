@@ -1,11 +1,10 @@
-import React from "react";
 import Image from "next/image";
 
 type LoadingSpinnerProps = {
     loading: boolean;
 };
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ loading }) => {
+export const LoadingSpinner = ({ loading }: LoadingSpinnerProps) => {
     return (
         <div className="h-12 flex justify-center items-center mt-3 mb-3">
             {loading && (

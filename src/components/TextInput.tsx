@@ -10,7 +10,7 @@ type TextInputProps = {
 
 export function TextInput({ value, onChange, onKeyDown }: TextInputProps) {
     const [shake, setShake] = useState(false);
-    const isMobile = useMediaQuery("(max-width: 640px)");
+    const isMobile = useMediaQuery();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {

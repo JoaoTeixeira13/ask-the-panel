@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "Ask the Panel",
-    description: "Your go to counsels",
+    description: "Your go-to counsels",
 };
 
 export default function RootLayout({

@@ -7,11 +7,11 @@ type TooltipProps = {
     delayValue?: number;
 };
 
-export function Tooltip({
+export const Tooltip = ({
     content,
     children,
     delayValue = 1500,
-}: TooltipProps) {
+}: TooltipProps) => {
     const [visible, setVisible] = useState(false);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const tooltipId = useId();
@@ -51,4 +51,4 @@ export function Tooltip({
             </div>
         </div>
     );
-}
+};

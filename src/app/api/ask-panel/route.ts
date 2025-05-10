@@ -6,8 +6,8 @@ import { ZodError } from "zod";
 
 export async function POST(req: NextRequest) {
     try {
-        const body = PanelRequestSchema.parse(await req.json());
-        const { selectedCharacter, question, responseLength } = body;
+        const { selectedCharacter, question, responseLength } =
+            PanelRequestSchema.parse(await req.json());
 
         const characterPrompt = getCharacterPrompt(
             selectedCharacter,
