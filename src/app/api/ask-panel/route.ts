@@ -1,5 +1,6 @@
 import { getCharacterPrompt } from "@/lib/characters";
 import { config } from "@/lib/config";
+import { MessageRole } from "@/types/messageRole";
 import { PanelRequestSchema } from "@/types/panel";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";
@@ -25,8 +26,8 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify({
                 model: config.model,
                 messages: [
-                    { role: "system", content: characterPrompt },
-                    { role: "user", content: question },
+                    { role: MessageRole.System, content: characterPrompt },
+                    { role: MessageRole.User, content: question },
                 ],
             }),
         });

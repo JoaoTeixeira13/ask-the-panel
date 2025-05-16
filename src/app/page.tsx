@@ -7,7 +7,7 @@ import { CharacterId } from "@/types/characters";
 import { PromptResultSchema, PromptResut } from "@/types/promptResult";
 import { ResponseLength } from "@/types/responseLength";
 import { useState } from "react";
-import { useMediaQuery } from "./hooks/useMediaQuery";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const Home = () => {
     const [question, setQuestion] = useState("");

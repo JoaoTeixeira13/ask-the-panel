@@ -4,7 +4,7 @@ import Image from "next/image";
 import { characters } from "@/lib/characters";
 import { CharacterId, CharacterQuote } from "@/types/characters";
 import { Tooltip } from "./Tooltip";
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type CharacterSelectorProps = {
     selectedCharacter: CharacterId;

@@ -1,6 +1,6 @@
 "use client";
 import { ResponseLength } from "@/types/responseLength";
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { TextInput } from "./TextInput";
 import { MobileSubmitButton } from "./MobileSubmitButton";
 import { LengthToggleButton } from "./LengthToggleButton";

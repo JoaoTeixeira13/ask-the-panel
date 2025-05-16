@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { QUESTION_MAX_LENGTH } from "@/lib/constants";
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type TextInputProps = {
     value: string;

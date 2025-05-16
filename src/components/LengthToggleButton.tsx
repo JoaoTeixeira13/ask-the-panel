@@ -3,7 +3,7 @@
 import { MessageCircle, MessageSquare } from "lucide-react";
 import { Tooltip } from "./Tooltip";
 import { ResponseLength } from "@/types/responseLength";
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type LengthToggleButtonProps = {
     currentResponseLength: ResponseLength;
