@@ -1,14 +1,15 @@
 "use client";
 import { CharacterId } from "@/types/characters";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { ChatMessage } from "@/types/messages";
+import { Message } from "./Message";
 
 type PanelResponseProps = {
-    answerCharacter?: CharacterId;
-    answer?: string;
     loading: boolean;
-    selectedCharatcer?: string;
+    selectedCharatcer: string;
+    chatHistory: ChatMessage[];
     error: string | null;
     onSetError: (value: string | null) => void;
 };
@@ -22,46 +23,55 @@ const characterNames: Record<string, string> = {
 
 const getPanelTitle = (
     loading: boolean,
-    answerCharacter?: string,
-    selectedCharacter?: string
+    chatHistory: ChatMessage[],
+    selectedCharacter: string
 ) => {
-    if (loading && selectedCharacter) {
+    if (loading) {
         return `${characterNames[selectedCharacter]} is thinking...`;
     }
-    if (!loading && answerCharacter) {
-        return `${characterNames[answerCharacter]} says:`;
+    if (chatHistory.length === 0) {
+        return `${characterNames[selectedCharacter]} awaits your question`;
     }
-    return "The panel awaits your question";
+    if (!loading) {
+        return `${characterNames[selectedCharacter]} says:`;
+    }
 };
 
-export const PanelResponse: React.FC<PanelResponseProps> = ({
-    answerCharacter,
-    answer,
+export const PanelResponse = ({
     loading,
     selectedCharatcer,
+    chatHistory,
     error,
     onSetError,
-}) => {
+}: PanelResponseProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            containerRef.current.scrollTo({
+                top: containerRef.current.scrollHeight,
+                behavior: "smooth",
+            });
+        }
+    }, [chatHistory]);
+
     return (
         <div className="flex-1 relative overflow-y-auto mb-2 border border-primary rounded-xl shadow-md p-4 bg-background shadow-inner">
             <h2 className="text-xl font-semibold mb-4 text-luxury z-10 relative">
-                {getPanelTitle(loading, answerCharacter, selectedCharatcer)}
+                {getPanelTitle(loading, chatHistory, selectedCharatcer)}
             </h2>
 
-            {loading ? (
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <LoadingSpinner loading={loading} />
-                </div>
-            ) : (
-                <>
-                    <p className="text-gray-700 whitespace-pre-line">
-                        {answer}
-                    </p>
-                    {error && (
-                        <ErrorMessage message={error} onSetError={onSetError} />
-                    )}
-                </>
-            )}
+            <div
+                ref={containerRef}
+                className="bg-white p-4 rounded shadow h-96 overflow-y-auto"
+            >
+                {chatHistory.map((message: ChatMessage, index) => (
+                    <Message key={index} message={message} />
+                ))}
+                {loading && <LoadingSpinner loading={loading} />}
+            </div>
+
+            {error && <ErrorMessage message={error} onSetError={onSetError} />}
         </div>
     );
 };

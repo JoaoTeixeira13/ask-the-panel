@@ -4,10 +4,11 @@ import { ChatInput } from "@/components/ChatInput";
 import { PanelResponse } from "@/components/PanelResponse";
 import { QUESTION_MAX_LENGTH, QUESTION_MIN_LENGTH } from "@/lib/constants";
 import { CharacterId } from "@/types/characters";
-import { PromptResultSchema, PromptResut } from "@/types/promptResult";
+import { PromptResultSchema } from "@/types/promptResult";
 import { ResponseLength } from "@/types/responseLength";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { ChatMessage, MessageRole } from "@/types/messages";
 
 const Home = () => {
     const [question, setQuestion] = useState("");
@@ -17,9 +18,25 @@ const Home = () => {
     const [responseLength, setResponseLength] = useState<ResponseLength>(
         ResponseLength.Long
     );
-    const [result, setResult] = useState<PromptResut | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+
+    const storageKey = `chat-${selectedCharacter}`;
+
+    useEffect(() => {
+        const stored = localStorage.getItem(storageKey);
+
+        if (stored) {
+            setChatHistory(JSON.parse(stored));
+        } else {
+            setChatHistory([]);
+        }
+    }, [selectedCharacter]);
+
+    useEffect(() => {
+        localStorage.setItem(storageKey, JSON.stringify(chatHistory));
+    }, [chatHistory]);
 
     const isMobile = useMediaQuery();
 
@@ -40,10 +57,16 @@ const Home = () => {
         }
 
         setLoading(true);
-        setResult(null);
         setError(null);
 
         try {
+            const messageHistory: ChatMessage[] = [
+                ...chatHistory,
+                { role: MessageRole.User, content: question },
+            ];
+            setChatHistory(messageHistory);
+            setQuestion("");
+
             const response = await fetch("/api/ask-panel", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -51,6 +74,7 @@ const Home = () => {
                     selectedCharacter,
                     question,
                     responseLength,
+                    messageHistory,
                 }),
             });
 
@@ -62,7 +86,7 @@ const Home = () => {
                 return;
             }
 
-            setResult(validatedResponse.data);
+            setChatHistory([...messageHistory, validatedResponse.data]);
         } catch (error) {
             setError(`An error occurred when submitting the form: ${error}`);
         } finally {
@@ -87,10 +111,9 @@ const Home = () => {
             </div>
 
             <PanelResponse
-                answerCharacter={result?.selectedCharacter}
-                answer={result?.answer}
                 loading={loading}
                 selectedCharatcer={selectedCharacter}
+                chatHistory={chatHistory}
                 error={error}
                 onSetError={setError}
             />

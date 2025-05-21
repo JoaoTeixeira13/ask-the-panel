@@ -1,9 +1,21 @@
-import { CharacterId } from "./characters";
 import { z } from "zod";
+import { MessageRole } from "./messages";
 
 export const PromptResultSchema = z.object({
-    answer: z.string(),
-    selectedCharacter: z.nativeEnum(CharacterId),
+    role: z.literal(MessageRole.Assistant),
+    content: z.string(),
 });
 
-export type PromptResut = z.infer<typeof PromptResultSchema>;
+export type PromptResult = z.infer<typeof PromptResultSchema>;
+
+export const AIModelResponseSchema = z.object({
+    choices: z
+        .array(
+            z.object({
+                message: z.object({
+                    content: z.string(),
+                }),
+            })
+        )
+        .nonempty(),
+});

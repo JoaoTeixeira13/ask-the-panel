@@ -6,13 +6,13 @@ type LoadingSpinnerProps = {
 
 export const LoadingSpinner = ({ loading }: LoadingSpinnerProps) => {
     return (
-        <div className="h-12 flex justify-center items-center mt-3 mb-3">
+        <div className="h-12 flex justify-center items-center mt-1 mb-1">
             {loading && (
                 <Image
                     src="/images/coral.png"
                     alt="Loading..."
-                    width={96}
-                    height={96}
+                    width={24}
+                    height={24}
                     className="animate-spin rounded-full border border-dotted border-accent"
                 />
             )}
