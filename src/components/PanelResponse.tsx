@@ -56,14 +56,14 @@ export const PanelResponse = ({
     }, [chatHistory]);
 
     return (
-        <div className="flex-1 relative overflow-y-auto mb-2 border border-primary rounded-xl shadow-md p-4 bg-background shadow-inner">
-            <h2 className="text-xl font-semibold mb-4 text-luxury z-10 relative">
+        <div className="flex flex-1 flex-col justify-center mb-2 border border-primary rounded-xl shadow-md p-4 bg-background shadow-inner">
+            <h2 className="text-xl font-semibold mb-6 text-luxury z-10 relative">
                 {getPanelTitle(loading, chatHistory, selectedCharatcer)}
             </h2>
 
             <div
                 ref={containerRef}
-                className="bg-white p-4 rounded shadow h-96 overflow-y-auto"
+                className="bg-white p-4 rounded shadow max-h-86 overflow-y-auto"
             >
                 {chatHistory.map((message: ChatMessage, index) => (
                     <Message key={index} message={message} />
