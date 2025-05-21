@@ -4,7 +4,7 @@ Live Demo: [https://ask-the-panel.vercel.app/](https://ask-the-panel.vercel.app/
 
 ## Overview
 
-Ask the Panel is a playful and personality-driven Q&A GenAI app. Users can ask any question and receive a response from one of four characters:
+Ask the Panel is a playful and personality-driven Q&A GenAI app. Users can ask any questions and keep a chat with four different characters:
 
 💎 Tiffany Vandergilt – A wealthy heiress from San Francisco
 
@@ -14,10 +14,9 @@ Ask the Panel is a playful and personality-driven Q&A GenAI app. Users can ask a
 
 🧢 Chad – A crypto bro
 
-You can choose between a short or long response based on how detailed you want the answer to be.
+You can choose between a short or long response based on how detailed you want the answer to be. The application has contextual memory, so the character will remember your conversation so far.
 
-![Demo](./public/readMe/askThePanel1.gif)
-![Demo](./public/readMe/askThePanel2.gif)
+![Demo](./public/readMe/askThePanel.gif)
 
 ## Features
 
@@ -25,9 +24,11 @@ You can choose between a short or long response based on how detailed you want t
 
 -   AI responses using openrouter.ai
 
+-   Contextual memory
+
 -   Switchable model (default: `mistralai/mistral-7b-instruct:free`)
 
--   Input validation with **Zod**
+-   Input and prompt answer validation with **Zod**
 
 -   Fully deployed via **Vercel**
 
@@ -46,6 +47,8 @@ You can choose between a short or long response based on how detailed you want t
 -   Zod
 
 -   OpenRouter API
+
+-   Mistral AI
 
 ## Getting Started
 
