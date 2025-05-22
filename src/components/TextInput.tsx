@@ -8,7 +8,7 @@ type TextInputProps = {
     onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 };
 
-export function TextInput({ value, onChange, onKeyDown }: TextInputProps) {
+export const TextInput = ({ value, onChange, onKeyDown }: TextInputProps) => {
     const [shake, setShake] = useState(false);
     const isMobile = useMediaQuery();
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -68,4 +68,4 @@ export function TextInput({ value, onChange, onKeyDown }: TextInputProps) {
             </div>
         </div>
     );
-}
+};

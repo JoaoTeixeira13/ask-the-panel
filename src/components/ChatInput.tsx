@@ -14,14 +14,14 @@ type ChatInputProps = {
     disabled: boolean;
 };
 
-export function ChatInput({
+export const ChatInput = ({
     question,
     onChange,
     onSubmit,
     responseLength,
     onToggleResponseLength,
     disabled,
-}: ChatInputProps) {
+}: ChatInputProps) => {
     const isMobile = useMediaQuery();
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -50,4 +50,4 @@ export function ChatInput({
             {isMobile && <MobileSubmitButton disabled={disabled} />}
         </form>
     );
-}
+};

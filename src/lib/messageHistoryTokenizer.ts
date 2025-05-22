@@ -1,5 +1,6 @@
 import { ChatMessage } from "@/types/messages";
-import { getTokenCount } from "@/types/token";
+
+const getTokenCount: TokenCounter = (text) => Math.ceil(text.length / 4);
 
 export const getMessageHistoryWithinTokenBudget = (
     messageHistory: ChatMessage[],
