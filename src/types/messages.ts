@@ -1,7 +1,5 @@
-export enum MessageRole {
+export enum SystemRole {
     System = "system",
-    User = "user",
-    Assistant = "assistant",
 }
 
 export enum ChatMessageRole {
@@ -11,5 +9,10 @@ export enum ChatMessageRole {
 
 export type ChatMessage = {
     role: ChatMessageRole.User | ChatMessageRole.Assistant;
+    content: string;
+};
+
+export type UploadModelMessage = {
+    role: ChatMessageRole.User | ChatMessageRole.Assistant | SystemRole.System;
     content: string;
 };

@@ -1,7 +1,7 @@
 import { ChatMessage } from "@/types/messages";
 import { getTokenCount } from "@/types/token";
 
-export const trimMessageHistoryContextMemory = (
+export const getMessageHistoryWithinTokenBudget = (
     messageHistory: ChatMessage[],
     systemPrompt: string,
     userQuestion: string
@@ -11,26 +11,26 @@ export const trimMessageHistoryContextMemory = (
     const MAX_MODEL_TOKENS = 8000;
     const MAX_RESPONSE_TOKENS = 1000;
 
-    const availableTokensForHistory =
+    const availableTokens =
         MAX_MODEL_TOKENS -
         MAX_RESPONSE_TOKENS -
         systemTokens -
         userQuestionTokens;
 
     let totalTokens = 0;
-    const trimmedHistory: ChatMessage[] = [];
+    const trimmedMessageHistory: ChatMessage[] = [];
 
     for (let i = messageHistory.length - 1; i >= 0; i--) {
         const message = messageHistory[i];
-        const tokens = getTokenCount(message.content);
+        const messageTokens = getTokenCount(message.content);
 
-        if (totalTokens + tokens > availableTokensForHistory) {
+        if (totalTokens + messageTokens > availableTokens) {
             break;
         }
 
-        totalTokens += tokens;
-        trimmedHistory.unshift(message);
+        totalTokens += messageTokens;
+        trimmedMessageHistory.unshift(message);
     }
 
-    return trimmedHistory;
+    return trimmedMessageHistory;
 };

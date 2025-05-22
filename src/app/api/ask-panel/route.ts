@@ -1,7 +1,11 @@
 import { getCharacterPrompt } from "@/lib/characters";
 import { config } from "@/lib/config";
-import { trimMessageHistoryContextMemory } from "@/lib/trimMessageHistoryByTokens";
-import { MessageRole } from "@/types/messages";
+import { getMessageHistoryWithinTokenBudget } from "@/lib/messageHistoryTokenizer";
+import {
+    ChatMessageRole,
+    SystemRole,
+    UploadModelMessage,
+} from "@/types/messages";
 import { PanelRequestSchema } from "@/types/panel";
 import {
     AIModelResponseSchema,
@@ -21,16 +25,16 @@ export async function POST(req: NextRequest) {
             responseLength
         );
 
-        const trimmedHistory = trimMessageHistoryContextMemory(
+        const trimmedMessageHistory = getMessageHistoryWithinTokenBudget(
             messageHistory,
             characterPrompt,
             question
         );
 
-        const messages = [
-            { role: MessageRole.System, content: characterPrompt },
-            ...trimmedHistory,
-            { role: MessageRole.User, content: question },
+        const messages: UploadModelMessage[] = [
+            { role: SystemRole.System, content: characterPrompt },
+            ...trimmedMessageHistory,
+            { role: ChatMessageRole.User, content: question },
         ];
 
         const response = await fetch(config.openRouterUrl, {
@@ -71,12 +75,12 @@ export async function POST(req: NextRequest) {
 
         const content = parsed.data.choices[0].message.content;
 
-        const reply: PromptResult = PromptResultSchema.parse({
-            role: MessageRole.Assistant,
+        const replyMessage: PromptResult = PromptResultSchema.parse({
+            role: ChatMessageRole.Assistant,
             content,
         });
 
-        return NextResponse.json(reply);
+        return NextResponse.json(replyMessage);
     } catch (error) {
         if (error instanceof ZodError) {
             return NextResponse.json(
