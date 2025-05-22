@@ -1,1 +1,1 @@
-type TokenCounter = (text: string) => number;
+export type TokenCounter = (text: string) => number;

@@ -1,4 +1,5 @@
 import { ChatMessage } from "@/types/messages";
+import { TokenCounter } from "@/types/token";
 
 const getTokenCount: TokenCounter = (text) => Math.ceil(text.length / 4);
 
