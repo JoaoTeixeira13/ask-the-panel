@@ -24,7 +24,7 @@ You can choose between a short or long response based on how detailed you want t
 
 -   AI responses using openrouter.ai
 
--   Contextual memory
+-   Contextual memory, with token counting to prevent context loss
 
 -   Switchable model (default: `mistralai/mistral-7b-instruct:free`)
 
