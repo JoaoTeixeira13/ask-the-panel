@@ -63,7 +63,7 @@ export const PanelResponse = ({
 
             <div
                 ref={containerRef}
-                className="bg-white p-4 rounded shadow max-h-86 overflow-y-auto"
+                className="bg-white p-4 rounded shadow h-86 overflow-y-auto"
             >
                 {chatHistory.map((message: ChatMessage, index) => (
                     <Message key={index} message={message} />
