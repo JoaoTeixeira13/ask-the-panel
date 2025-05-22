@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { MessageRole } from "./messages";
+import { ChatMessageRole } from "./messages";
 
 export const PromptResultSchema = z.object({
-    role: z.literal(MessageRole.Assistant),
+    role: z.literal(ChatMessageRole.Assistant),
     content: z.string(),
 });
 

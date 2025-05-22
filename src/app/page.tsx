@@ -8,7 +8,7 @@ import { PromptResultSchema } from "@/types/promptResult";
 import { ResponseLength } from "@/types/responseLength";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "../hooks/useMediaQuery";
-import { ChatMessage, MessageRole } from "@/types/messages";
+import { ChatMessage, ChatMessageRole } from "@/types/messages";
 
 const Home = () => {
     const [question, setQuestion] = useState("");
@@ -62,7 +62,7 @@ const Home = () => {
         try {
             const messageHistory: ChatMessage[] = [
                 ...chatHistory,
-                { role: MessageRole.User, content: question },
+                { role: ChatMessageRole.User, content: question },
             ];
             setChatHistory(messageHistory);
             setQuestion("");

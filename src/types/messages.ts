@@ -4,7 +4,12 @@ export enum MessageRole {
     Assistant = "assistant",
 }
 
+export enum ChatMessageRole {
+    User = "user",
+    Assistant = "assistant",
+}
+
 export type ChatMessage = {
-    role: MessageRole.User | MessageRole.Assistant;
+    role: ChatMessageRole.User | ChatMessageRole.Assistant;
     content: string;
 };

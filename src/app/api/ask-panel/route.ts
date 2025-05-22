@@ -1,5 +1,6 @@
 import { getCharacterPrompt } from "@/lib/characters";
 import { config } from "@/lib/config";
+import { trimMessageHistoryContextMemory } from "@/lib/trimMessageHistoryByTokens";
 import { MessageRole } from "@/types/messages";
 import { PanelRequestSchema } from "@/types/panel";
 import {
@@ -19,9 +20,16 @@ export async function POST(req: NextRequest) {
             selectedCharacter,
             responseLength
         );
+
+        const trimmedHistory = trimMessageHistoryContextMemory(
+            messageHistory,
+            characterPrompt,
+            question
+        );
+
         const messages = [
             { role: MessageRole.System, content: characterPrompt },
-            ...messageHistory,
+            ...trimmedHistory,
             { role: MessageRole.User, content: question },
         ];
 

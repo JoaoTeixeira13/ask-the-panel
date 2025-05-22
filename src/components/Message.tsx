@@ -1,21 +1,21 @@
 "use client";
 import React from "react";
-import { ChatMessage, MessageRole } from "@/types/messages";
+import { ChatMessage, ChatMessageRole } from "@/types/messages";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type MessageProps = {
     message: ChatMessage;
 };
 
-const getMessageClass = (role: MessageRole, isMobile: boolean) => {
+const getMessageClass = (role: ChatMessageRole, isMobile: boolean) => {
     const base = "text-luxury py-4 px-6 mt-1 mb-1 rounded-xl";
 
-    if (role === MessageRole.User) {
+    if (role === ChatMessageRole.User) {
         return `${base} text-right bg-accent/20 w-fit ${
             isMobile ? "ml-5" : "ml-12"
         }`;
     }
-    if (role === MessageRole.Assistant) {
+    if (role === ChatMessageRole.Assistant) {
         return `${base} text-left bg-coral/20 ${isMobile ? "mr-5" : "mr-12"}`;
     }
 };
@@ -26,7 +26,7 @@ export const Message = ({ message }: MessageProps) => {
     return (
         <div
             className={`flex ${
-                message.role === MessageRole.User
+                message.role === ChatMessageRole.User
                     ? "justify-end"
                     : "justify-start"
             }`}
