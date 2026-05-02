@@ -13,10 +13,10 @@ import { ChatMessage, ChatMessageRole } from "@/types/messages";
 const Home = () => {
     const [question, setQuestion] = useState("");
     const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>(
-        CharacterId.Heiress
+        CharacterId.Heiress,
     );
     const [responseLength, setResponseLength] = useState<ResponseLength>(
-        ResponseLength.Long
+        ResponseLength.Long,
     );
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ const Home = () => {
 
         if (question.length > QUESTION_MAX_LENGTH) {
             setError(
-                `Your question is too long. Try to keep it under ${QUESTION_MAX_LENGTH} characters.`
+                `Your question is too long. Try to keep it under ${QUESTION_MAX_LENGTH} characters.`,
             );
             return;
         }
@@ -127,7 +127,7 @@ const Home = () => {
                     setResponseLength(
                         responseLength === ResponseLength.Short
                             ? ResponseLength.Long
-                            : ResponseLength.Short
+                            : ResponseLength.Short,
                     )
                 }
                 disabled={loading || !selectedCharacter}
