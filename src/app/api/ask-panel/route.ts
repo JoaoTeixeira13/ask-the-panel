@@ -84,8 +84,14 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         if (error instanceof ZodError) {
             return NextResponse.json(
-                { error: "Invalid request format", details: error.errors },
-                { status: 400 }
+                {
+                    error: "Invalid request format",
+                    details: error.issues.map((issue) => ({
+                        path: issue.path.join("."),
+                        message: issue.message,
+                    })),
+                },
+                { status: 400 },
             );
         }
 
