@@ -26,7 +26,7 @@ You can choose between a short or long response based on how detailed you want t
 
 -   Contextual memory, with token counting to prevent context loss
 
--   Switchable model (default: `mistralai/mistral-7b-instruct:free`)
+-   Switchable model (default: `openai/gpt-oss-120b:free`)
 
 -   Input and prompt answer validation with **Zod**
 
@@ -48,7 +48,7 @@ You can choose between a short or long response based on how detailed you want t
 
 -   OpenRouter API
 
--   Mistral AI
+-   Open AI
 
 ## Getting Started
 
